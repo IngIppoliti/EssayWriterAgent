@@ -8,7 +8,7 @@ from langchain_core.pydantic_v1 import BaseModel
   # critique of theessay
   # list of documents 
   # number of revision we made
-  # maximum number of 
+  # maximum number of revisions
 
 class AgentState(TypedDict):
     task: str
