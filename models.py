@@ -1,7 +1,7 @@
 from typing import TypedDict, List
 from langchain_core.pydantic_v1 import BaseModel
 
-# A agent that want to keep track of:
+# A agent that wants to keep track of:
 # task
 # plan
 # draft of the essay
