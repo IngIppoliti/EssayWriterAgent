@@ -31,7 +31,6 @@ be used when making any requested revisions (as outlined below). \
 Generate a list of search queries that will gather any relevant information. Only generate 3 queries max."""
 
 
-
 #take the task in input and generate a plan (to build the essay chapter, sections, structure)
 def plan_node(state: AgentState):
     messages = [
@@ -40,6 +39,7 @@ def plan_node(state: AgentState):
     ]
     response = model.invoke(messages)
     return {"plan": response.content}
+
 
 #AGENT that take the OUTLINE AND PERFORM EXTRACT SOME QUERIES 
 def research_plan_node(state: AgentState):
@@ -53,7 +53,6 @@ def research_plan_node(state: AgentState):
         for r in response['results']:                                     #we put each response from each queries in the content
             content.append(r['content'])
     return {"content": content}
-
 
 
 #AGENT WRITER that take the task and the content and write the essay
@@ -73,6 +72,7 @@ def generation_node(state: AgentState):
         "revision_number": state.get("revision_number", 1) + 1
     }
 
+
 #AGENT that writhe the CRITIQUE
 def reflection_node(state: AgentState):
     messages = [
@@ -81,6 +81,7 @@ def reflection_node(state: AgentState):
     ]
     response = model.invoke(messages)
     return {"critique": response.content}
+
 
 #AGENT CRITIQUE RESEARCHER that perform researches on the critique that has been done and add them to the content
 def research_critique_node(state: AgentState):
