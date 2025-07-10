@@ -19,5 +19,6 @@ class AgentState(TypedDict):
     revision_number: int
     max_revisions: int
 
+
 class Queries(BaseModel):
     queries: List[str]
