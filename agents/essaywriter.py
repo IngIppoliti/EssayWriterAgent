@@ -3,7 +3,7 @@ from models import AgentState, Queries
 from prompts import *
 from langchain_openai import ChatOpenAI
 from tavily import TavilyClient
-from config import TAVILY_API_KEY
+from config import TAVILY_API_KEY 
 
 model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 tavily = TavilyClient(api_key=TAVILY_API_KEY)
