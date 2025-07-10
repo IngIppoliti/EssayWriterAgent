@@ -1,6 +1,9 @@
+from prompts import *
 from langchain_openai import ChatOpenAI
-model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+from config import TAVILY_API_KEY
 
+model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+tavily = TavilyClient(api_key=TAVILY_API_KEY)
 
 #take the task in input and generate a plan (to build the essay chapter, sections, structure)
 def plan_node(state: AgentState):
@@ -54,6 +57,7 @@ def reflection_node(state: AgentState):
     return {"critique": response.content}
 
 
+
 #AGENT CRITIQUE RESEARCHER that perform researches on the critique that has been done and add them to the content
 def research_critique_node(state: AgentState):
     queries = model.with_structured_output(Queries).invoke([
@@ -66,6 +70,7 @@ def research_critique_node(state: AgentState):
         for r in response['results']:
             content.append(r['content'])
     return {"content": content}
+
 
 
 def should_continue(state):
