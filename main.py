@@ -1,3 +1,5 @@
+#MAIN
+
 from interface.app import run_app
 
 if __name__ == "__main__":
