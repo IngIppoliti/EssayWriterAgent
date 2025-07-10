@@ -1,4 +1,4 @@
-#MAIN
+# MAIN
 
 from interface.app import run_app
 

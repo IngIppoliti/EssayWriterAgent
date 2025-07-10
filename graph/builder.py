@@ -6,6 +6,7 @@ from nodes.generator import generation_node
 from nodes.reflector import reflection_node, research_critique_node
 from nodes.condition import should_continue
 
+
 def build_graph():
     memory = SqliteSaver.from_conn_string(":memory:")
     builder = StateGraph(AgentState)
@@ -21,6 +22,8 @@ def build_graph():
     builder.add_edge("research_plan", "generate")
     builder.add_edge("reflect", "research_critique")
     builder.add_edge("research_critique", "generate")
-    builder.add_conditional_edges("generate", should_continue, {END: END, "reflect": "reflect"})
+    builder.add_conditional_edges(
+        "generate", should_continue, {END: END, "reflect": "reflect"}
+    )
 
     return builder.compile(checkpointer=memory)

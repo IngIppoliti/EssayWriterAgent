@@ -2,13 +2,13 @@ from typing import TypedDict, List
 from langchain_core.pydantic_v1 import BaseModel
 
 # A agent that want to keep track of:
-  # task
-  # plan 
-  # draft of the essay
-  # critique of theessay
-  # list of documents 
-  # number of revision we made
-  # maximum number of revisions
+# task
+# plan
+# draft of the essay
+# critique of theessay
+# list of documents
+# number of revision we made
+# maximum number of revisions
 
 
 class AgentState(TypedDict):

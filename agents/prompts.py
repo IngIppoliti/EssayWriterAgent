@@ -11,7 +11,7 @@ Utilize all the information below as needed:
 
 {content}"""
 
-#generate eventually a critique
+# generate eventually a critique
 REFLECTION_PROMPT = """You are a teacher grading an essay submission. \
 Generate critique and recommendations for the user's submission. \
 Provide detailed recommendations, including requests for length, depth, style, etc."""
@@ -21,7 +21,7 @@ RESEARCH_PLAN_PROMPT = """You are a researcher charged with providing informatio
 be used when writing the following essay. Generate a list of search queries that will gather \
 any relevant information. Only generate 3 queries max."""
 
-#after a critique generate a list of search queries
+# after a critique generate a list of search queries
 RESEARCH_CRITIQUE_PROMPT = """You are a researcher charged with providing information that can \
 be used when making any requested revisions (as outlined below). \
 Generate a list of search queries that will gather any relevant information. Only generate 3 queries max."""
