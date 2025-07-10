@@ -10,6 +10,7 @@ from langchain_core.pydantic_v1 import BaseModel
   # number of revision we made
   # maximum number of revisions
 
+
 class AgentState(TypedDict):
     task: str
     plan: str
