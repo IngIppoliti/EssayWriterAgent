@@ -1,5 +1,6 @@
 PLAN_PROMPT = """You are an expert writer tasked with writing a high level outline of an essay. \
-Write such an outline for the user provided topic. Give an outline of the essay along with any relevant notes \
+Write such an outline for the user provided topic. 
+Give an outline of the essay along with any relevant notes \
 or instructions for the sections."""
 
 WRITER_PROMPT = """You are an essay assistant tasked with writing excellent 5-paragraph essays.\
