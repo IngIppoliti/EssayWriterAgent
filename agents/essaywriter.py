@@ -1,11 +1,11 @@
 from langchain_core.messages import SystemMessage, HumanMessage
-from models import AgentState, Queries
-from prompts import PLAN_PROMPT, RESEARCH_PLAN_PROMPT, WRITER_PROMPT, REFLECTION_PROMPT, RESEARCH_CRITIQUE_PROMPT
+from .models import AgentState, Queries
+from .prompts import PLAN_PROMPT, RESEARCH_PLAN_PROMPT, WRITER_PROMPT, REFLECTION_PROMPT, RESEARCH_CRITIQUE_PROMPT
 from langchain_openai import ChatOpenAI
 from tavily import TavilyClient
 from config import TAVILY_API_KEY
 
-model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+model = ChatOpenAI(model="gpt-4o", temperature=0)
 tavily = TavilyClient(api_key=TAVILY_API_KEY)
 
 
@@ -18,14 +18,13 @@ def plan_node(state: AgentState):
 
 # AGENT that take the OUTLINE AND PERFORM EXTRACT SOME QUERIES
 def research_plan_node(state: AgentState):
-    queries = model.with_structured_output(Queries).invoke(
-        [  # to force that the output will be something with a structure (in this case the object Queries)
-            SystemMessage(content=RESEARCH_PLAN_PROMPT),
-            HumanMessage(
-                content=state["task"]
-            ),  # it's a task for which the agent will research the query
-        ]
-    )
+    # Specifica il parser con method='function_calling' per evitare il warning
+    # to force that the output will be something with a structure (in this case the object Queries)
+    queries = model.with_structured_output(Queries).invoke([
+        SystemMessage(content=RESEARCH_PLAN_PROMPT),
+        HumanMessage(content=state['task'])
+    ])
+
     content = (
         # we look at the list of documents if there is
         # the node content in the output,

@@ -1,6 +1,7 @@
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.sqlite import SqliteSaver
-from models import AgentState
+from agents.models import AgentState
+import sqlite3
 from agents.essaywriter import plan_node, research_plan_node
 from agents.essaywriter import generation_node
 from agents.essaywriter import reflection_node, research_critique_node
@@ -13,7 +14,9 @@ def should_continue(state):
 
 
 def build_graph():
-    memory = SqliteSaver.from_conn_string(":memory:")
+    # ✅ Crea una connessione persistente
+    conn = sqlite3.connect(":memory:", check_same_thread=False)
+    memory = SqliteSaver(conn)
     builder = StateGraph(AgentState)
 
     builder.add_node("planner", plan_node)
