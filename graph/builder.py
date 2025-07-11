@@ -4,7 +4,7 @@ from models import AgentState
 from agents.essaywriter import plan_node, research_plan_node
 from agents.essaywriter import generation_node
 from agents.essaywriter import reflection_node, research_critique_node
-from agents.essaywriter import should_continue
+
 
 def should_continue(state):
     if state["revision_number"] > state["max_revisions"]:
