@@ -31,7 +31,7 @@ def research_plan_node(state: AgentState):
         # the node content in the output,
         # otherwise we create an empty list
         state["content"] or []
-    )  
+    )
     for q in queries.queries:  # we loop over the queries we generated
         response = tavily.search(
             query=q, max_results=2
@@ -84,5 +84,3 @@ def research_critique_node(state: AgentState):
         for r in response["results"]:
             content.append(r["content"])
     return {"content": content}
-
-

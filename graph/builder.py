@@ -1,10 +1,15 @@
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.sqlite import SqliteSaver
 from models import AgentState
-from nodes.planner import plan_node, research_plan_node
-from nodes.generator import generation_node
-from nodes.reflector import reflection_node, research_critique_node
-from nodes.condition import should_continue
+from agents.essaywriter import plan_node, research_plan_node
+from agents.essaywriter import generation_node
+from agents.essaywriter import reflection_node, research_critique_node
+from agents.essaywriter import should_continue
+
+def should_continue(state):
+    if state["revision_number"] > state["max_revisions"]:
+        return END
+    return "reflect"
 
 
 def build_graph():
