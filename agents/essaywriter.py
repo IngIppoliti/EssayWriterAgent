@@ -1,6 +1,12 @@
 from langchain_core.messages import SystemMessage, HumanMessage
 from .models import AgentState, Queries
-from .prompts import PLAN_PROMPT, RESEARCH_PLAN_PROMPT, WRITER_PROMPT, REFLECTION_PROMPT, RESEARCH_CRITIQUE_PROMPT
+from .prompts import (
+    PLAN_PROMPT,
+    RESEARCH_PLAN_PROMPT,
+    WRITER_PROMPT,
+    REFLECTION_PROMPT,
+    RESEARCH_CRITIQUE_PROMPT,
+)
 from langchain_openai import ChatOpenAI
 from tavily import TavilyClient
 from config import TAVILY_API_KEY
@@ -20,10 +26,12 @@ def plan_node(state: AgentState):
 def research_plan_node(state: AgentState):
     # Specifica il parser con method='function_calling' per evitare il warning
     # to force that the output will be something with a structure (in this case the object Queries)
-    queries = model.with_structured_output(Queries).invoke([
-        SystemMessage(content=RESEARCH_PLAN_PROMPT),
-        HumanMessage(content=state['task'])
-    ])
+    queries = model.with_structured_output(Queries).invoke(
+        [
+            SystemMessage(content=RESEARCH_PLAN_PROMPT),
+            HumanMessage(content=state["task"]),
+        ]
+    )
 
     content = (
         # we look at the list of documents if there is
@@ -84,4 +92,3 @@ def research_critique_node(state: AgentState):
         for r in response["results"]:
             content.append(r["content"])
     return {"content": content}
-
