@@ -1,6 +1,12 @@
 from langchain_core.messages import SystemMessage, HumanMessage
 from models import AgentState, Queries
-from prompts import PLAN_PROMPT, RESEARCH_PLAN_PROMPT, WRITER_PROMPT, REFLECTION_PROMPT, RESEARCH_CRITIQUE_PROMPT
+from prompts import (
+    PLAN_PROMPT,
+    RESEARCH_PLAN_PROMPT,
+    WRITER_PROMPT,
+    REFLECTION_PROMPT,
+    RESEARCH_CRITIQUE_PROMPT,
+)
 from langchain_openai import ChatOpenAI
 from tavily import TavilyClient
 from config import TAVILY_API_KEY
@@ -30,7 +36,8 @@ def research_plan_node(state: AgentState):
         # we look at the list of documents if there is
         # the node content in the output,
         # otherwise we create an empty list
-        state["content"] or []
+        state["content"]
+        or []
     )
     for q in queries.queries:  # we loop over the queries we generated
         response = tavily.search(
